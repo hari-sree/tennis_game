@@ -62,7 +62,6 @@ public class GameTest {
         assertEquals("Deuce", game.score());
     }
 
-
     @Test
     public void scoreShouldReturnAdvantageWhenOnePlayerScoreWhileInDeuce() {
         Player playerOne = new Player("player 1");

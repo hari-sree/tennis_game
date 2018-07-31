@@ -44,6 +44,10 @@ public class Score {
         return this.points() >= 4;
     }
 
+    public boolean isAtleastSevenPoints() {
+        return this.points() >= 7;
+    }
+
     public boolean isMoreThan(Score score) {
         return this.points() > score.points();
     }

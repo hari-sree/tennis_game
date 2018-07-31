@@ -17,9 +17,6 @@ public class Game {
     }
 
     public String score() {
-        Score playerOneScore = getPlayerScore(playerOne);
-        Score playerTwoScore = getPlayerScore(playerTwo);
-
         if(IsDeuce()){
             return "Deuce";
         }
@@ -28,7 +25,7 @@ public class Game {
             return "Advantage "+ leadingPlayer().getName();
         }
 
-        return playerOneScore.description() +"-"+playerTwoScore.description();
+        return playerOneScore().description() +"-"+playerTwoScore().description();
     }
 
     public void pointWonBy(Player player) {
