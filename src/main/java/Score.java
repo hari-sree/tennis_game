@@ -43,4 +43,8 @@ public class Score {
     public void pointScored() {
         this.points += 1;
     }
+
+    public boolean isAtleastThreePoints() {
+        return this.points() >= 3;
+    }
 }

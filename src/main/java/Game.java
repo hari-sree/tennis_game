@@ -16,7 +16,15 @@ public class Game {
     }
 
     public String score() {
-        return playerOne.score().description() +"-"+ playerTwo.score().description();
+        Score playerOneScore = playerOne.score();
+        Score playerTwoScore = playerTwo.score();
+
+        boolean playersHaveSameScore = playerOneScore.equals(playerTwoScore);
+        boolean eachPlayerHasAtleastThreePoints = playerOneScore.isAtleastThreePoints() && playerTwoScore.isAtleastThreePoints();
+        if(playersHaveSameScore && eachPlayerHasAtleastThreePoints){
+            return "Deuce";
+        }
+        return playerOneScore.description() +"-"+playerTwoScore.description();
     }
 
     public void pointWonBy(Player playerOne) {

@@ -56,4 +56,16 @@ public class ScoreTest {
 
         assertEquals(score2, score);
     }
+    @Test
+    public void isAtleastThreePointsShouldReturnFalseWhenScoreIsLessThan3Points() {
+        Score score = new Score(2);
+
+        assertFalse(score.isAtleastThreePoints());
+    }
+    @Test
+    public void isAtleastThreePointsShouldReturnTrueWhenScoreIsAtleast3Points() {
+        Score score = new Score(3);
+
+        assertTrue(score.isAtleastThreePoints());
+    }
 }

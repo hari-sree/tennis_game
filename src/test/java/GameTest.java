@@ -30,4 +30,21 @@ public class GameTest {
         game.pointWonBy(playerOne);
         assertEquals("15-0", game.score());
     }
+
+    @Test
+    public void scoreShouldReturnDeuceWhenBothPlayersHave3Points() {
+        Player playerOne = new Player("player 1");
+        Player playerTwo = new Player("player 2");
+
+        Game game = new Game(playerOne, playerTwo);
+        game.pointWonBy(playerOne);
+        game.pointWonBy(playerTwo);
+        game.pointWonBy(playerOne);
+
+        game.pointWonBy(playerTwo);
+        game.pointWonBy(playerOne);
+        game.pointWonBy(playerTwo);
+
+        assertEquals("Deuce", game.score());
+    }
 }
