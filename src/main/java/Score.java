@@ -24,22 +24,6 @@ public class Score {
         return this.pointsDescription.get(this.points());
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-
-        if (obj == null)
-            return false;
-
-        if (getClass() != obj.getClass())
-            return false;
-
-        Score score = (Score) obj;
-
-        return Objects.equals(points, score.points);
-    }
-
     public void pointScored() {
         this.points += 1;
     }
@@ -63,4 +47,21 @@ public class Score {
     public boolean isMoreThan(Score score) {
         return this.points() > score.points();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (obj == null)
+            return false;
+
+        if (getClass() != obj.getClass())
+            return false;
+
+        Score score = (Score) obj;
+
+        return Objects.equals(points, score.points);
+    }
+
 }

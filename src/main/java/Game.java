@@ -16,7 +16,6 @@ public class Game {
         playerScores.put(playerTwo, new Score());
     }
 
-
     public String score() {
         Score playerOneScore = getPlayerScore(playerOne);
         Score playerTwoScore = getPlayerScore(playerTwo);
@@ -40,13 +39,10 @@ public class Game {
         return this.playerScores.get(player);
     }
     public boolean isComplete() {
-        Score playerOneScore = getPlayerScore(playerOne);
-        Score playerTwoScore = getPlayerScore(playerTwo);
+        boolean playerOneLeadsByTwoPoint = playerOneScore().isTwoMoreThan(playerTwoScore());
+        boolean playerTwoLeadsByTwoPoint = playerTwoScore().isTwoMoreThan(playerOneScore());
 
-        boolean playerOneLeadsByTwoPoint = playerOneScore.isTwoMoreThan(playerTwoScore);
-        boolean playerTwoLeadsByTwoPoint = playerTwoScore.isTwoMoreThan(playerOneScore);
-
-        boolean anyPlayerHasAtLeastFourPoints = playerOneScore.isAtleastFourPoints() || playerTwoScore.isAtleastFourPoints();
+        boolean anyPlayerHasAtLeastFourPoints = playerOneScore().isAtleastFourPoints() || playerTwoScore().isAtleastFourPoints();
         boolean anyPlayerHasTwoPointMoreThanOther = playerOneLeadsByTwoPoint || playerTwoLeadsByTwoPoint;
 
         return anyPlayerHasAtLeastFourPoints && anyPlayerHasTwoPointMoreThanOther;
@@ -60,21 +56,23 @@ public class Game {
     }
 
     private boolean IsDeuce(){
-        Score playerOneScore = getPlayerScore(playerOne);
-        Score playerTwoScore = getPlayerScore(playerTwo);
-
-        boolean playersHaveSameScore = playerOneScore.equals(playerTwoScore);
-        boolean eachPlayerHasAtLeastThreePoints = playerOneScore.isAtleastThreePoints() && playerTwoScore.isAtleastThreePoints();
+        boolean playersHaveSameScore = playerOneScore().equals(playerTwoScore());
+        boolean eachPlayerHasAtLeastThreePoints = playerOneScore().isAtleastThreePoints() && playerTwoScore().isAtleastThreePoints();
         return playersHaveSameScore && eachPlayerHasAtLeastThreePoints;
     }
 
-    private boolean IsAdvantage(){
-        Score playerOneScore = getPlayerScore(playerOne);
-        Score playerTwoScore = getPlayerScore(playerTwo);
+    private Score playerOneScore(){
+        return getPlayerScore(playerOne);
+    }
 
-        boolean eachPlayerHasAtLeastThreePoints = playerOneScore.isAtleastThreePoints() && playerTwoScore.isAtleastThreePoints();
-        boolean playerOneLeadsByOnePoint = playerOneScore.isOneMoreThan(playerTwoScore);
-        boolean playerTwoLeadsByOnePoint = playerTwoScore.isOneMoreThan(playerOneScore);
+    private Score playerTwoScore(){
+        return getPlayerScore(playerTwo);
+    }
+
+    private boolean IsAdvantage(){
+        boolean eachPlayerHasAtLeastThreePoints = playerOneScore().isAtleastThreePoints() && playerTwoScore().isAtleastThreePoints();
+        boolean playerOneLeadsByOnePoint = playerOneScore().isOneMoreThan(playerTwoScore());
+        boolean playerTwoLeadsByOnePoint = playerTwoScore().isOneMoreThan(playerOneScore());
 
         boolean anyPlayerHasOnePointMoreThanOther = playerOneLeadsByOnePoint || playerTwoLeadsByOnePoint;
 
