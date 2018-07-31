@@ -6,6 +6,12 @@ import static org.junit.Assert.*;
 
 public class PlayerTest {
     @Test
+    public void shouldReturnPlayerName(){
+        Player player = new Player("player 1");
+
+        assertEquals("player 1" , player.getName());
+    }
+    @Test
     public void shouldReturnPlayerScore(){
         Player player = new Player("player 1");
         assertNotNull(player.score());

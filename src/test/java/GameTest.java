@@ -47,4 +47,24 @@ public class GameTest {
 
         assertEquals("Deuce", game.score());
     }
+
+
+    @Test
+    public void scoreShouldReturnAdvantageWhenOnePlayerScoreWhileInDeuce() {
+        Player playerOne = new Player("player 1");
+        Player playerTwo = new Player("player 2");
+
+        Game game = new Game(playerOne, playerTwo);
+        game.pointWonBy(playerOne);
+        game.pointWonBy(playerTwo);
+        game.pointWonBy(playerOne);
+
+        game.pointWonBy(playerTwo);
+        game.pointWonBy(playerOne);
+        game.pointWonBy(playerTwo);
+
+        game.pointWonBy(playerTwo);
+
+        assertEquals("Advantage player 2", game.score());
+    }
 }

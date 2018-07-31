@@ -16,4 +16,8 @@ public class Player {
     public void scorePoint() {
         this.score.pointScored();
     }
+
+    public String getName() {
+        return name;
+    }
 }

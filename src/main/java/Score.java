@@ -47,4 +47,8 @@ public class Score {
     public boolean isAtleastThreePoints() {
         return this.points() >= 3;
     }
+
+    public boolean isOneMoreThan(Score score) {
+        return this.points() - score.points() ==1;
+    }
 }

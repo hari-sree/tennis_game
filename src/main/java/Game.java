@@ -20,10 +20,18 @@ public class Game {
         Score playerTwoScore = playerTwo.score();
 
         boolean playersHaveSameScore = playerOneScore.equals(playerTwoScore);
-        boolean eachPlayerHasAtleastThreePoints = playerOneScore.isAtleastThreePoints() && playerTwoScore.isAtleastThreePoints();
-        if(playersHaveSameScore && eachPlayerHasAtleastThreePoints){
+        boolean eachPlayerHasAtLeastThreePoints = playerOneScore.isAtleastThreePoints() && playerTwoScore.isAtleastThreePoints();
+        if(playersHaveSameScore && eachPlayerHasAtLeastThreePoints){
             return "Deuce";
         }
+        boolean playerOneLeadsByOnePoint = playerOneScore.isOneMoreThan(playerTwoScore);
+        boolean playerTwoLeadsByOnePoint = playerTwoScore.isOneMoreThan(playerOneScore);
+
+        boolean anyPlayerHasOnePointMoreThanOther = playerOneLeadsByOnePoint || playerTwoLeadsByOnePoint;
+        if(eachPlayerHasAtLeastThreePoints && anyPlayerHasOnePointMoreThanOther){
+            return "Advantage "+ (playerOneLeadsByOnePoint ? playerOne.getName() : playerTwo.getName());
+        }
+
         return playerOneScore.description() +"-"+playerTwoScore.description();
     }
 
