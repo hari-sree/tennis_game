@@ -14,4 +14,12 @@ public class Game {
     public boolean isComplete() {
         return false;
     }
+
+    public String score() {
+        return playerOne.score().description() +"-"+ playerTwo.score().description();
+    }
+
+    public void pointWonBy(Player playerOne) {
+        playerOne.scorePoint();
+    }
 }

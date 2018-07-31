@@ -41,4 +41,19 @@ public class ScoreTest {
 
         assertEquals(60, score.description());
     }
+    @Test
+    public void scoresShouldBeEqualWhenPointsAreSame() {
+        Score score1 = new Score(4);
+        Score score2 = new Score(4);
+
+        assertEquals(score1, score2);
+    }
+    @Test
+    public void shouldReturnScoreWhenPointIsScored() {
+        Score score = new Score();
+        score.pointScored();
+        Score score2 = new Score(1);
+
+        assertEquals(score2, score);
+    }
 }
