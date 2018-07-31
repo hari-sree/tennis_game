@@ -49,6 +49,6 @@ public class Match {
         if(this.currentGame.isComplete()){
             return this.matchScore();
         }
-        return this.matchScore()+", "+this.currentGame.score();
+        return String.format("%1$s, %2$s", this.matchScore(), this.currentGame.score());
     }
 }

@@ -9,12 +9,31 @@ public class Game {
     private HashMap<Player, Score> playerScores = new HashMap<>();
 
     public Game(Player playerOne, Player playerTwo) {
-        //TODO : REFACTOR
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
 
         playerScores.put(playerOne, new Score());
         playerScores.put(playerTwo, new Score());
+    }
+
+
+    public String score() {
+        Score playerOneScore = getPlayerScore(playerOne);
+        Score playerTwoScore = getPlayerScore(playerTwo);
+
+        if(IsDeuce()){
+            return "Deuce";
+        }
+
+        if(IsAdvantage()){
+            return "Advantage "+ leadingPlayer().getName();
+        }
+
+        return playerOneScore.description() +"-"+playerTwoScore.description();
+    }
+
+    public void pointWonBy(Player player) {
+        getPlayerScore(player).pointScored();
     }
 
     private Score getPlayerScore(Player player){
@@ -40,28 +59,25 @@ public class Game {
         return playerOneScore.isMoreThan(playerTwoScore) ? playerOne : playerTwo;
     }
 
-    public String score() {
-        //TODO : REFACTOR
+    private boolean IsDeuce(){
         Score playerOneScore = getPlayerScore(playerOne);
         Score playerTwoScore = getPlayerScore(playerTwo);
 
         boolean playersHaveSameScore = playerOneScore.equals(playerTwoScore);
         boolean eachPlayerHasAtLeastThreePoints = playerOneScore.isAtleastThreePoints() && playerTwoScore.isAtleastThreePoints();
-        if(playersHaveSameScore && eachPlayerHasAtLeastThreePoints){
-            return "Deuce";
-        }
+        return playersHaveSameScore && eachPlayerHasAtLeastThreePoints;
+    }
+
+    private boolean IsAdvantage(){
+        Score playerOneScore = getPlayerScore(playerOne);
+        Score playerTwoScore = getPlayerScore(playerTwo);
+
+        boolean eachPlayerHasAtLeastThreePoints = playerOneScore.isAtleastThreePoints() && playerTwoScore.isAtleastThreePoints();
         boolean playerOneLeadsByOnePoint = playerOneScore.isOneMoreThan(playerTwoScore);
         boolean playerTwoLeadsByOnePoint = playerTwoScore.isOneMoreThan(playerOneScore);
 
         boolean anyPlayerHasOnePointMoreThanOther = playerOneLeadsByOnePoint || playerTwoLeadsByOnePoint;
-        if(eachPlayerHasAtLeastThreePoints && anyPlayerHasOnePointMoreThanOther){
-            return "Advantage "+ (playerOneLeadsByOnePoint ? playerOne.getName() : playerTwo.getName());
-        }
 
-        return playerOneScore.description() +"-"+playerTwoScore.description();
-    }
-
-    public void pointWonBy(Player player) {
-        getPlayerScore(player).pointScored();
+        return eachPlayerHasAtLeastThreePoints && anyPlayerHasOnePointMoreThanOther;
     }
 }
