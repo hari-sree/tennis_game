@@ -23,4 +23,37 @@ public class MatchTest {
 
         assertEquals("1-0", match.score());
     }
+    @Test
+    public void matchShouldReturnScoreWhenTwoGamesIsWonByPlayer(){
+        Match match = new Match("player 1", "player 2");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+
+        assertEquals("1-1", match.score());
+    }
+
+    @Test
+    public void matchShouldReturnScoreWhenSecondGameIsOnGoing(){
+        Match match = new Match("player 1", "player 2");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 2");
+
+        assertEquals("1-0, 30-30", match.score());
+    }
 }

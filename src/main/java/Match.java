@@ -26,8 +26,16 @@ public class Match {
     }
 
     public void pointWonBy(String playerName) {
+        if (this.currentGame.isComplete()){
+            this.createNextGame();
+        }
         Player player = this.getPlayerByName(playerName);
         this.currentGame.pointWonBy(player);
+    }
+
+    private void createNextGame(){
+        this.currentGame = new Game(this.playerOne, this.playerTwo);
+        this.games.add(currentGame);
     }
 
     public String matchScore(){

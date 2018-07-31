@@ -1,19 +1,28 @@
+import java.util.HashMap;
+
 /**
  * Created by sree on 31/7/18.
  */
 public class Game {
     private Player playerOne;
     private Player playerTwo;
+    private HashMap<Player, Score> playerScores = new HashMap<>();
 
     public Game(Player playerOne, Player playerTwo) {
-
+        //TODO : REFACTOR
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
+
+        playerScores.put(playerOne, new Score());
+        playerScores.put(playerTwo, new Score());
     }
 
+    private Score getPlayerScore(Player player){
+        return this.playerScores.get(player);
+    }
     public boolean isComplete() {
-        Score playerOneScore = playerOne.score();
-        Score playerTwoScore = playerTwo.score();
+        Score playerOneScore = getPlayerScore(playerOne);
+        Score playerTwoScore = getPlayerScore(playerTwo);
 
         boolean playerOneLeadsByTwoPoint = playerOneScore.isTwoMoreThan(playerTwoScore);
         boolean playerTwoLeadsByTwoPoint = playerTwoScore.isTwoMoreThan(playerOneScore);
@@ -25,15 +34,16 @@ public class Game {
     }
 
     public Player leadingPlayer(){
-        Score playerOneScore = playerOne.score();
-        Score playerTwoScore = playerTwo.score();
+        Score playerOneScore = getPlayerScore(playerOne);
+        Score playerTwoScore = getPlayerScore(playerTwo);
 
         return playerOneScore.isMoreThan(playerTwoScore) ? playerOne : playerTwo;
     }
 
     public String score() {
-        Score playerOneScore = playerOne.score();
-        Score playerTwoScore = playerTwo.score();
+        //TODO : REFACTOR
+        Score playerOneScore = getPlayerScore(playerOne);
+        Score playerTwoScore = getPlayerScore(playerTwo);
 
         boolean playersHaveSameScore = playerOneScore.equals(playerTwoScore);
         boolean eachPlayerHasAtLeastThreePoints = playerOneScore.isAtleastThreePoints() && playerTwoScore.isAtleastThreePoints();
@@ -52,6 +62,6 @@ public class Game {
     }
 
     public void pointWonBy(Player player) {
-        player.scorePoint();
+        getPlayerScore(player).pointScored();
     }
 }

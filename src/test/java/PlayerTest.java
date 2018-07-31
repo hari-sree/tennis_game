@@ -11,12 +11,4 @@ public class PlayerTest {
 
         assertEquals("player 1" , player.getName());
     }
-    @Test
-    public void shouldReturnPlayerScore(){
-        Player player = new Player("player 1");
-        assertNotNull(player.score());
-        Score expectedScore = new Score();
-
-        assertEquals(expectedScore , player.score());
-    }
 }
