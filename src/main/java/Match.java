@@ -5,10 +5,10 @@ import java.util.List;
 public class Match {
     private final Player playerOne;
     private final Player playerTwo;
-    private Game currentGame;
+    private TennisGame currentGame;
 
     private HashMap<String, Player> playersByName = new HashMap<>();
-    private List<Game> games = new ArrayList<>();
+    private List<TennisGame> games = new ArrayList<>();
 
     public Match(String playerOne, String playerTwo) {
         this.playerOne = new Player(playerOne);
@@ -34,15 +34,27 @@ public class Match {
     }
 
     private void createNextGame(){
-        this.currentGame = new Game(this.playerOne, this.playerTwo);
+        this.currentGame = createNewGame();
         this.games.add(currentGame);
     }
 
-    public String matchScore(){
-        long playerOneWins = games.stream().filter(game -> game.isComplete() && game.leadingPlayer().equals(playerOne)).count();
-        long playerTwoWins = games.stream().filter(game -> game.isComplete() && game.leadingPlayer().equals(playerTwo)).count();
+    private TennisGame createNewGame(){
+        return isATie() ? new TieBreakerGame(this.playerOne, this.playerTwo): new Game(this.playerOne, this.playerTwo);
+    }
+    private boolean isATie() {
+        return playerOneWins() == 6 &&  playerTwoWins() == 6;
+    }
 
-        return String.format("%1$d-%2$d", playerOneWins, playerTwoWins);
+    private long playerOneWins(){
+        return games.stream().filter(game -> game.isComplete() && game.leadingPlayer().equals(playerOne)).count();
+    }
+
+    private long playerTwoWins(){
+        return games.stream().filter(game -> game.isComplete() && game.leadingPlayer().equals(playerTwo)).count();
+    }
+
+    public String matchScore(){
+        return String.format("%1$d-%2$d", playerOneWins(), playerTwoWins());
     }
 
     public String score() {

@@ -91,4 +91,79 @@ public class MatchTest {
 
         assertEquals("1-0, 30-30", match.score());
     }
+
+    @Test
+    public void matchShouldStartTieBrakerGameInCaseof6to6Score(){
+        Match match = new Match("player 1", "player 2");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+
+        // Tie breaker match begins
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+
+        assertEquals("6-6, 0-5", match.score());
+    }
 }
