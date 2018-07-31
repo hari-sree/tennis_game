@@ -51,4 +51,16 @@ public class Score {
     public boolean isOneMoreThan(Score score) {
         return this.points() - score.points() ==1;
     }
+
+    public boolean isTwoMoreThan(Score score) {
+        return this.points() - score.points() >=2;
+    }
+
+    public boolean isAtleastFourPoints() {
+        return this.points() >= 4;
+    }
+
+    public boolean isMoreThan(Score score) {
+        return this.points() > score.points();
+    }
 }

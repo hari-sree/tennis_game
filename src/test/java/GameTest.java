@@ -14,6 +14,20 @@ public class GameTest {
         assertFalse(game.isComplete());
     }
     @Test
+    public void shouldReturnTrueWhenGameIsComplete() {
+        Player playerOne = new Player("player 1");
+        Player playerTwo = new Player("player 2");
+
+        Game game = new Game(playerOne, playerTwo);
+
+        game.pointWonBy(playerOne);
+        game.pointWonBy(playerOne);
+        game.pointWonBy(playerOne);
+        game.pointWonBy(playerOne);
+
+        assertTrue(game.isComplete());
+    }
+    @Test
     public void shouldReturnZeroScoreWhenGameHasNotStarted() {
         Player playerOne = new Player("player 1");
         Player playerTwo = new Player("player 2");

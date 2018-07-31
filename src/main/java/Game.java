@@ -12,7 +12,23 @@ public class Game {
     }
 
     public boolean isComplete() {
-        return false;
+        Score playerOneScore = playerOne.score();
+        Score playerTwoScore = playerTwo.score();
+
+        boolean playerOneLeadsByTwoPoint = playerOneScore.isTwoMoreThan(playerTwoScore);
+        boolean playerTwoLeadsByTwoPoint = playerTwoScore.isTwoMoreThan(playerOneScore);
+
+        boolean anyPlayerHasAtLeastFourPoints = playerOneScore.isAtleastFourPoints() || playerTwoScore.isAtleastFourPoints();
+        boolean anyPlayerHasTwoPointMoreThanOther = playerOneLeadsByTwoPoint || playerTwoLeadsByTwoPoint;
+
+        return anyPlayerHasAtLeastFourPoints && anyPlayerHasTwoPointMoreThanOther;
+    }
+
+    public Player leadingPlayer(){
+        Score playerOneScore = playerOne.score();
+        Score playerTwoScore = playerTwo.score();
+
+        return playerOneScore.isMoreThan(playerTwoScore) ? playerOne : playerTwo;
     }
 
     public String score() {
@@ -35,7 +51,7 @@ public class Game {
         return playerOneScore.description() +"-"+playerTwoScore.description();
     }
 
-    public void pointWonBy(Player playerOne) {
-        playerOne.scorePoint();
+    public void pointWonBy(Player player) {
+        player.scorePoint();
     }
 }

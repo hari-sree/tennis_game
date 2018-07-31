@@ -1,27 +1,46 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-/**
- * Created by sree on 25/7/18.
- */
 public class Match {
-    private final String playerOne;
-    private final String playerTwo;
+    private final Player playerOne;
+    private final Player playerTwo;
+    private Game currentGame;
 
-    private HashMap<String, Integer> playerScores = new HashMap<>();
+    private HashMap<String, Player> playersByName = new HashMap<>();
+    private List<Game> games = new ArrayList<>();
 
     public Match(String playerOne, String playerTwo) {
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
+        this.playerOne = new Player(playerOne);
+        this.playerTwo = new Player(playerTwo);
 
-        this.playerScores.put(this.playerOne, 0);
-        this.playerScores.put(this.playerOne, 0);
+        this.playersByName.put(playerOne, this.playerOne);
+        this.playersByName.put(playerTwo, this.playerTwo);
+
+        this.currentGame = new Game(this.playerOne, this.playerTwo);
+        this.games.add(currentGame);
     }
 
-    public void pointWonBy(String player) {
-        this.playerScores.put(this.playerOne, this.playerScores.get(player) + 1);
+    private Player getPlayerByName(String playerName){
+        return this.playersByName.get(playerName);
     }
 
-    public PlayerScores score() {
-        return new PlayerScores(0, 0);
+    public void pointWonBy(String playerName) {
+        Player player = this.getPlayerByName(playerName);
+        this.currentGame.pointWonBy(player);
+    }
+
+    public String matchScore(){
+        long playerOneWins = games.stream().filter(game -> game.isComplete() && game.leadingPlayer().equals(playerOne)).count();
+        long playerTwoWins = games.stream().filter(game -> game.isComplete() && game.leadingPlayer().equals(playerTwo)).count();
+
+        return String.format("%1$d-%2$d", playerOneWins, playerTwoWins);
+    }
+
+    public String score() {
+        if(this.currentGame.isComplete()){
+            return this.matchScore();
+        }
+        return this.matchScore()+", "+this.currentGame.score();
     }
 }

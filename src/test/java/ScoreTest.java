@@ -69,6 +69,12 @@ public class ScoreTest {
         assertTrue(score.isAtleastThreePoints());
     }
     @Test
+    public void isAtleastFourPointsShouldReturnTrueWhenScoreIsAtleast3Points() {
+        Score score = new Score(4);
+
+        assertTrue(score.isAtleastFourPoints());
+    }
+    @Test
     public void isOneMoreThanShouldReturnFalseWhenScoreIsNotGreaterBy1Point() {
         Score score1 = new Score(3);
         Score score2 = new Score(4);
@@ -81,5 +87,12 @@ public class ScoreTest {
         Score score2 = new Score(3);
 
         assertTrue(score1.isOneMoreThan(score2));
+    }
+    @Test
+    public void isTwoMoreThanShouldReturnTrueWhenScoreIsGreaterBy2Point() {
+        Score score1 = new Score(4);
+        Score score2 = new Score(2);
+
+        assertTrue(score1.isTwoMoreThan(score2));
     }
 }

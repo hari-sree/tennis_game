@@ -8,8 +8,19 @@ public class MatchTest {
     @Test
     public void matchShouldReturnScoreForNoPointsScored(){
         Match match = new Match("player 1", "player 2");
-        PlayerScores score = match.score();
 
-        assertEquals(0, score.playerOne());
+        assertEquals("0-0, 0-0", match.score());
+    }
+
+    @Test
+    public void matchShouldReturnScoreWhenOneGameIsWonByPlayer(){
+        Match match = new Match("player 1", "player 2");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        assertEquals("1-0", match.score());
     }
 }
