@@ -6,10 +6,9 @@ import static org.junit.Assert.*;
 
 public class MatchTest {
     @Test
-    public void matchShouldReturnScore(){
+    public void matchShouldReturnScoreForNoPointsScored(){
         Match match = new Match("player 1", "player 2");
-        match.pointWonBy("player 1");
-        Score score = match.score();
+        PlayerScores score = match.score();
 
         assertEquals(0, score.playerOne());
     }

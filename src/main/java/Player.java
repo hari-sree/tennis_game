@@ -1,0 +1,11 @@
+/**
+ * Created by sree on 31/7/18.
+ */
+public class Player {
+    private String name;
+
+    public Player(String name) {
+
+        this.name = name;
+    }
+}
