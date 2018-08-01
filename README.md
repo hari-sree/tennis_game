@@ -1,5 +1,9 @@
 # A solution to the tennis scoring problem
 
+## Notes :
+Used Intellij IDE with gradle as the build tool. If you find any issues with building, try refreshing the project from the gradle tool in Intellij, and rebuild the project.
+
+## Problem :
 The scoring system for tennis works like this.
 
 * A match has one set and a set has many games
