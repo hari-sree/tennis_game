@@ -16,13 +16,7 @@ public class Match {
 
         this.playersByName.put(playerOne, this.playerOne);
         this.playersByName.put(playerTwo, this.playerTwo);
-
-        this.currentGame = new Game(this.playerOne, this.playerTwo);
-        this.games.add(currentGame);
-    }
-
-    private Player getPlayerByName(String playerName){
-        return this.playersByName.get(playerName);
+        this.createNextGame();
     }
 
     public void pointWonBy(String playerName) {
@@ -33,9 +27,31 @@ public class Match {
         this.currentGame.pointWonBy(player);
     }
 
+    public String matchScore(){
+        return String.format("%1$d-%2$d", playerOneWins(), playerTwoWins());
+    }
+
+    public String score() {
+        if(this.currentGame.isComplete()){
+            return this.matchScore();
+        }
+        return String.format("%1$s, %2$s", this.matchScore(), this.currentGame.score());
+    }
+
+    public boolean isComplete(){
+        boolean hasAtleastOnePlayerHasSixGames = playerOneWins() >= 6 || playerTwoWins() >= 6;
+        boolean hasTwoGameMargin = Math.abs(playerOneWins() - playerTwoWins()) >=2;
+
+        return hasTwoGameMargin && hasAtleastOnePlayerHasSixGames;
+    }
+
     private void createNextGame(){
         this.currentGame = createNewGame();
         this.games.add(currentGame);
+    }
+
+    private Player getPlayerByName(String playerName){
+        return this.playersByName.get(playerName);
     }
 
     private TennisGame createNewGame(){
@@ -51,16 +67,5 @@ public class Match {
 
     private long playerTwoWins(){
         return games.stream().filter(game -> game.isComplete() && game.leadingPlayer().equals(playerTwo)).count();
-    }
-
-    public String matchScore(){
-        return String.format("%1$d-%2$d", playerOneWins(), playerTwoWins());
-    }
-
-    public String score() {
-        if(this.currentGame.isComplete()){
-            return this.matchScore();
-        }
-        return String.format("%1$s, %2$s", this.matchScore(), this.currentGame.score());
     }
 }

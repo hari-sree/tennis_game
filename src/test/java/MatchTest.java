@@ -166,4 +166,46 @@ public class MatchTest {
 
         assertEquals("6-6, 0-5", match.score());
     }
+
+    @Test
+    public void matchShouldBeCompleteWhenAPlayerLeadsBy2GamesAndaScoreOf6Games(){
+        Match match = new Match("player 1", "player 2");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+        match.pointWonBy("player 2");
+
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+        match.pointWonBy("player 1");
+
+        assertTrue(match.isComplete());
+    }
 }
